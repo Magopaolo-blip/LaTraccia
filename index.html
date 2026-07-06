@@ -3,136 +3,141 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Trova la Traccia</title>
-  <meta name="description" content="Segui il viaggio della Traccia. Aurora è partita da Roma: una capsula, un passaporto, un diario." />
+  <title>Trova la Traccia · Il viaggio di Aurora</title>
+  <meta name="description" content="Segui il viaggio di Aurora, la prima Traccia partita da Roma." />
   <meta name="theme-color" content="#f7f1e6" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQb7V7pnb43eK0tB4wIuEbrMfBvOg=" crossorigin="" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
-  <div class="paper-noise" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
 
-  <header class="topbar" aria-label="Navigazione principale">
+  <header class="site-header" aria-label="Navigazione principale">
     <a class="brand" href="#top" aria-label="Trova la Traccia">
-      <span class="brand-star">✦</span>
-      <span>TROVA LA TRACCIA</span>
+      <span aria-hidden="true">✦</span>
+      <strong>TROVA LA TRACCIA</strong>
     </a>
-    <nav class="navlinks" aria-label="Sezioni">
+    <nav class="nav" aria-label="Sezioni">
       <a href="#viaggio">Il viaggio</a>
-      <a href="#aurora">Aurora</a>
+      <a href="#passaporto">Passaporto</a>
+      <a href="#diario">Diario</a>
       <a href="#cos-e">Cos'è</a>
     </nav>
-    <button class="round-action" type="button" aria-label="Ho incontrato questa Traccia" data-scroll-incontro>✦</button>
   </header>
 
   <main id="top">
-    <section class="hero" aria-label="Introduzione">
-      <div class="compass-faint" aria-hidden="true"></div>
-      <div class="route-faint" aria-hidden="true"></div>
+    <section class="hero-shell" aria-label="Introduzione al viaggio di Aurora">
+      <div class="hero-copy">
+        <p class="eyebrow">Adesso</p>
+        <div class="clock" aria-live="polite">
+          <div id="current-date" class="date">6 LUGLIO 2026</div>
+          <div id="current-time" class="time">09:13</div>
+        </div>
+        <h1>Segui il viaggio della Traccia</h1>
+        <div class="hero-actions">
+          <a class="button button-dark" href="#incontro">Ho trovato una Traccia</a>
+          <a class="button button-light" href="#viaggio">Segui Aurora <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
 
-      <p class="label">Adesso</p>
-      <div class="now" aria-live="polite">
-        <div id="current-date" class="now-date">6 LUGLIO 2026</div>
-        <div id="current-time" class="now-time">08:42</div>
-      </div>
-      <h1>Segui il viaggio della Traccia</h1>
-      <div class="hero-actions">
-        <a class="btn btn-dark" href="#incontro">Ho trovato una Traccia</a>
-        <a class="btn btn-light" href="#aurora">Segui Aurora <span aria-hidden="true">→</span></a>
-      </div>
+      <article class="aurora-feature" id="aurora" aria-label="Aurora">
+        <div class="feature-mark" aria-hidden="true">✦</div>
+        <div class="feature-main">
+          <p class="eyebrow">Prima Traccia</p>
+          <h2>Aurora</h2>
+          <p>È partita da Roma. Il suo viaggio è appena iniziato.</p>
+          <span class="status">In viaggio</span>
+        </div>
+        <dl class="feature-stats">
+          <div>
+            <dt>Ultima tappa</dt>
+            <dd>Roma</dd>
+          </div>
+          <div>
+            <dt>Età del viaggio</dt>
+            <dd>Appena partita</dd>
+          </div>
+          <div>
+            <dt>Incontri</dt>
+            <dd id="meeting-count">1</dd>
+          </div>
+        </dl>
+      </article>
     </section>
 
-    <section class="aurora-panel" id="aurora" aria-label="Aurora">
-      <div class="aurora-card">
-        <div class="sigil" aria-hidden="true">✦</div>
-        <div class="aurora-intro">
-          <h2>AURORA</h2>
-          <span class="pill">In viaggio</span>
-          <p>È partita da Roma.<br>Il suo viaggio è appena iniziato.</p>
-          <a href="#viaggio" class="text-link">Scopri Aurora <span aria-hidden="true">→</span></a>
-        </div>
-        <div class="stat">
-          <span class="stat-icon" aria-hidden="true">⌖</span>
-          <small>Ultima tappa</small>
-          <strong>Roma</strong>
-        </div>
-        <div class="stat">
-          <span class="stat-icon" aria-hidden="true">◷</span>
-          <small>Età del viaggio</small>
-          <strong>Appena partita</strong>
-        </div>
-        <div class="stat">
-          <span class="stat-icon" aria-hidden="true">♙</span>
-          <small>Incontri</small>
-          <strong id="meeting-count">1</strong>
-        </div>
+    <section class="journey-section" id="viaggio" aria-label="Il viaggio di Aurora">
+      <div class="section-head">
+        <p class="eyebrow">Il viaggio di Aurora</p>
+        <h2>Roma, punto di partenza.</h2>
       </div>
-    </section>
 
-    <section class="map-section" id="viaggio" aria-label="Il viaggio di Aurora">
-      <p class="section-kicker">Il viaggio di Aurora</p>
-      <div class="map-card">
-        <div id="traceMap" role="img" aria-label="Mappa del viaggio di Aurora, partenza da Roma"></div>
-        <div class="map-overlay" aria-hidden="true"></div>
-        <div class="map-label city-label">Roma</div>
-        <div class="map-note">Posizione pubblica approssimata a 50 metri.</div>
-        <button class="locate" type="button" aria-label="Centra la mappa su Aurora" data-center-map>⌖</button>
+      <div class="journey-card">
+        <div id="traceMap" role="img" aria-label="Mappa di Roma con la posizione pubblica approssimata di Aurora"></div>
+        <div class="map-vignette" aria-hidden="true"></div>
+        <div class="map-caption">
+          <strong>Aurora</strong>
+          <span>Posizione pubblica approssimata a 50 metri.</span>
+        </div>
+        <button class="map-center" type="button" aria-label="Centra la mappa su Aurora" data-center-map>⌖</button>
       </div>
     </section>
 
     <section class="passport-section" id="passaporto" aria-label="Passaporto della Traccia">
-      <p class="section-kicker">Passaporto</p>
-      <article class="passport-strip">
-        <div class="passport-seal" aria-hidden="true">✦</div>
-        <div class="passport-copy">
-          <h3>ROMA</h3>
+      <div class="section-head small">
+        <p class="eyebrow">Passaporto</p>
+      </div>
+      <article class="passport">
+        <div class="stamp muted" aria-hidden="true">ROMA<br>PRIMA<br>TAPPA</div>
+        <div class="passport-divider" aria-hidden="true"></div>
+        <div class="passport-text">
+          <h2>Roma</h2>
           <time datetime="2026-07-06">6 luglio 2026</time>
           <p>Prima partenza.</p>
         </div>
-        <div class="passport-stamp" aria-hidden="true">PRIMA<br>TAPPA</div>
+        <div class="postmark" aria-hidden="true">✦</div>
       </article>
     </section>
 
     <section class="diary-section" id="diario" aria-label="Diario della Traccia">
-      <p class="section-kicker">Diario</p>
+      <p class="eyebrow">Diario</p>
       <blockquote>Ogni incontro cambia la direzione di una Traccia.</blockquote>
     </section>
 
     <section class="about-section" id="cos-e" aria-label="Cos'è Trova la Traccia">
-      <p class="section-kicker">Cos'è</p>
+      <p class="eyebrow">Cos'è</p>
       <h2>Un oggetto in viaggio.</h2>
       <p>Ogni Traccia ha un nome, un passaporto e un diario. Quando la incontri, puoi aggiungere una tappa e aiutarla a continuare il suo viaggio.</p>
     </section>
 
     <section class="encounter-section" id="incontro" aria-label="Ho incontrato questa Traccia">
-      <article class="encounter-card">
-        <div class="cta-star" aria-hidden="true">✦</div>
-        <h2>Ho incontrato questa Traccia</h2>
-        <p>Aggiungi il tuo passaggio al viaggio di Aurora.</p>
-        <form id="encounterForm" class="encounter-form">
-          <label>
-            Nome o pseudonimo
-            <input name="name" type="text" placeholder="Viaggiatore anonimo" autocomplete="name" />
-          </label>
-          <label>
-            Luogo
-            <input name="place" type="text" placeholder="Roma" required />
-          </label>
-          <label>
-            Messaggio
-            <textarea name="message" rows="4" placeholder="Dove l'hai incontrata? Cosa vuoi lasciare nel suo diario?"></textarea>
-          </label>
-          <div class="form-actions">
-            <button class="btn btn-light" type="button" id="useLocation">Usa posizione</button>
-            <button class="btn btn-gold" type="submit">Aggiungi passaggio</button>
-          </div>
-          <p id="formNote" class="form-note">La posizione pubblica sarà approssimata a 50 metri.</p>
-        </form>
-      </article>
+      <div class="encounter-intro">
+        <p class="eyebrow">Custodia</p>
+        <h2>Hai incontrato Aurora?</h2>
+        <p>Aggiungi il tuo passaggio al suo viaggio.</p>
+      </div>
+      <form id="encounterForm" class="encounter-form">
+        <label>
+          Nome o pseudonimo
+          <input name="name" type="text" placeholder="Viaggiatore anonimo" autocomplete="name" />
+        </label>
+        <label>
+          Luogo
+          <input name="place" type="text" placeholder="Roma" required />
+        </label>
+        <label class="full">
+          Messaggio
+          <textarea name="message" rows="4" placeholder="Dove l'hai incontrata? Cosa vuoi lasciare nel suo diario?"></textarea>
+        </label>
+        <div class="form-actions full">
+          <button class="button button-light" type="button" id="useLocation">Usa posizione</button>
+          <button class="button button-dark" type="submit">Aggiungi passaggio</button>
+        </div>
+        <p id="formNote" class="form-note full">La posizione pubblica sarà approssimata a 50 metri.</p>
+      </form>
     </section>
   </main>
 
