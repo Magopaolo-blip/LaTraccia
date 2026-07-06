@@ -1,10 +1,12 @@
 const trace = {
   name: 'Aurora',
-  code: 'AUR-0636-01',
   city: 'Roma',
   coords: [41.902782, 12.496366],
+  directionPoint: [41.856, 12.615],
   publicRadius: 50,
 };
+
+let mapInstance;
 
 function pad(value) {
   return String(value).padStart(2, '0');
@@ -23,72 +25,64 @@ function updateClock() {
 }
 
 function initMap() {
-  if (!window.L) return;
-  const map = L.map('traceMap', {
+  if (!window.L || !document.getElementById('traceMap')) return;
+
+  mapInstance = L.map('traceMap', {
     zoomControl: false,
     attributionControl: false,
     dragging: true,
     scrollWheelZoom: false,
     doubleClickZoom: false,
-  }).setView(trace.coords, 13);
+    touchZoom: true,
+  }).setView([41.894, 12.51], 11);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
-  }).addTo(map);
+  }).addTo(mapInstance);
 
   const icon = L.divIcon({
     className: '',
     html: '<div class="custom-trace-icon" aria-hidden="true"></div>',
-    iconSize: [22, 22],
-    iconAnchor: [11, 11],
+    iconSize: [20, 20],
+    iconAnchor: [10, 10],
   });
+
+  L.polyline([trace.coords, trace.directionPoint], {
+    color: '#b58a35',
+    weight: 2,
+    opacity: 0.72,
+    dashArray: '2 10',
+    lineCap: 'round',
+  }).addTo(mapInstance);
 
   L.circle(trace.coords, {
     radius: trace.publicRadius,
-    color: '#b89245',
+    color: '#b58a35',
     weight: 1,
-    fillColor: '#b89245',
-    fillOpacity: 0.18,
-  }).addTo(map);
+    fillColor: '#b58a35',
+    fillOpacity: 0.16,
+  }).addTo(mapInstance);
 
-  L.marker(trace.coords, { icon }).addTo(map).bindPopup('Aurora · Roma');
+  L.marker(trace.coords, { icon }).addTo(mapInstance);
 }
 
-function initMenu() {
-  const button = document.querySelector('[data-menu-button]');
-  const menu = document.querySelector('[data-mobile-menu]');
-  if (!button || !menu) return;
-  button.addEventListener('click', () => menu.classList.toggle('is-open'));
-  menu.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => menu.classList.remove('is-open'));
+function initCenterButton() {
+  const button = document.querySelector('[data-center-map]');
+  if (!button) return;
+  button.addEventListener('click', () => {
+    if (mapInstance) mapInstance.setView([41.894, 12.51], 11, { animate: true });
   });
-}
-
-function initDialog() {
-  const dialog = document.querySelector('[data-trace-dialog]');
-  const open = document.querySelector('[data-open-trace]');
-  const closeButtons = document.querySelectorAll('[data-close-dialog]');
-  if (!dialog || !open) return;
-
-  open.addEventListener('click', () => dialog.showModal());
-  closeButtons.forEach((button) => button.addEventListener('click', () => dialog.close()));
 }
 
 function initEncounterForm() {
   const form = document.getElementById('encounterForm');
   const useLocation = document.getElementById('useLocation');
   const formNote = document.getElementById('formNote');
-  const counters = [
-    document.getElementById('meeting-count'),
-    document.getElementById('identity-meetings'),
-    document.getElementById('archive-meetings'),
-    document.getElementById('dialog-meetings'),
-  ].filter(Boolean);
-
+  const counter = document.getElementById('meeting-count');
   let meetings = Number(localStorage.getItem('auroraMeetings') || '1');
-  counters.forEach((node) => { node.textContent = meetings; });
+  if (counter) counter.textContent = meetings;
 
-  if (useLocation) {
+  if (useLocation && formNote && form) {
     useLocation.addEventListener('click', () => {
       if (!navigator.geolocation) {
         formNote.textContent = 'Geolocalizzazione non disponibile su questo dispositivo.';
@@ -108,43 +102,43 @@ function initEncounterForm() {
     });
   }
 
-  if (form) {
+  if (form && formNote) {
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       meetings += 1;
       localStorage.setItem('auroraMeetings', String(meetings));
-      counters.forEach((node) => { node.textContent = meetings; });
+      if (counter) counter.textContent = meetings;
       form.reset();
-      formNote.textContent = 'Il tuo passaggio è stato aggiunto in questa demo. Con il backend sarà salvato nel Diario reale della Traccia.';
+      formNote.textContent = 'Passaggio aggiunto nella demo. Con il backend sarà salvato nel Diario reale della Traccia.';
     });
   }
 }
 
+function initScrollButton() {
+  const button = document.querySelector('[data-scroll-incontro]');
+  if (!button) return;
+  button.addEventListener('click', () => {
+    document.getElementById('incontro')?.scrollIntoView({ behavior: 'smooth' });
+  });
+}
+
 function initReveals() {
-  const targets = document.querySelectorAll('.section-index, .map-heading, .map-wrap, .identity-grid, .passport-shell, .diary-board, .archive-card, .encounter-card');
+  const targets = document.querySelectorAll('.aurora-card, .map-card, .passport-strip, .diary-section blockquote, .about-section, .encounter-card');
   targets.forEach((target) => target.classList.add('reveal'));
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) entry.target.classList.add('is-visible');
     });
-  }, { threshold: 0.18 });
+  }, { threshold: 0.14 });
   targets.forEach((target) => observer.observe(target));
-}
-
-function initCursorGlow() {
-  const glow = document.querySelector('.cursor-glow');
-  if (!glow) return;
-  window.addEventListener('pointermove', (event) => {
-    glow.style.left = `${event.clientX}px`;
-    glow.style.top = `${event.clientY}px`;
-  }, { passive: true });
 }
 
 updateClock();
 setInterval(updateClock, 30_000);
-initMenu();
-initDialog();
 initEncounterForm();
+initScrollButton();
 initReveals();
-initCursorGlow();
-window.addEventListener('load', initMap);
+window.addEventListener('load', () => {
+  initMap();
+  initCenterButton();
+});
