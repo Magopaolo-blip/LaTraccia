@@ -1,20 +1,21 @@
-# Trova la Traccia — sito prototipo v6
+# Trova la Traccia — v7
 
-Versione ridisegnata per una sola Traccia: Aurora.
+Versione corretta e auto-contenuta per GitHub Pages.
 
-## Cosa cambia nella v6
+## Cosa contiene
 
-- Rimossa la sezione "Ultime Tracce".
-- Home meno vuota e più compatta.
-- Aurora diventa protagonista già nel primo schermo.
-- Mappa dedicata: "Il viaggio di Aurora".
-- Layout più editoriale, leggibile e bilanciato.
-- Pronto per GitHub Pages.
+- Un solo file `index.html` con HTML, CSS e JavaScript integrati.
+- Nessuna dipendenza esterna.
+- Nessuna cartella `assets` obbligatoria.
+- Una sola Traccia protagonista: Aurora.
+- Home più compatta e coerente.
+- Mappa illustrata integrata, senza Leaflet/OpenStreetMap, per evitare problemi di caricamento.
+- Sezioni: Aurora, Il viaggio di Aurora, Passaporto, Diario, Cos'è.
+- Modulo demo “Ho incontrato questa Traccia”.
 
-## Pubblicazione su GitHub Pages
+## Come caricarla su GitHub
 
-1. Carica `index.html`, `README.md` e la cartella `assets` nella root del repository.
-2. Vai su `Settings > Pages`.
-3. Source: `Deploy from a branch`.
-4. Branch: `main`, folder: `/ (root)`.
-5. Salva e attendi il deploy.
+1. Estrai lo ZIP.
+2. Carica `index.html` e `README.md` nel repository.
+3. Conferma con `Commit changes`.
+4. Attendi il deploy di GitHub Pages.
