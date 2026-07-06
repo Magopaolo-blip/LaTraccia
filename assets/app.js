@@ -26,60 +26,6 @@ const TRACE_DATA = [
     diary: [
       { date: "6 luglio 2026", place: "Roma", text: "L’ho trovata in una mattina chiara. Sembrava già pronta a ripartire." }
     ]
-  },
-  {
-    id: "nomade",
-    code: "TLT-M004",
-    name: "Nomade",
-    born: "2 luglio 2026",
-    birthplace: "Firenze",
-    status: "In custodia",
-    age: "Esploratrice",
-    lastStop: "Firenze",
-    lastSignal: "2 ore fa",
-    distanceKm: 213,
-    people: 31,
-    lat: 43.7696,
-    lng: 11.2558,
-    path: [
-      [43.7696, 11.2558],
-      [43.7792, 11.2462],
-      [43.7904, 11.2811]
-    ],
-    passport: [
-      { city: "Firenze", date: "2 luglio 2026", note: "Nascita" },
-      { city: "Fiesole", date: "3 luglio 2026", note: "Prima salita" },
-      { city: "Firenze", date: "6 luglio 2026", note: "Ritorno in città" }
-    ],
-    diary: [
-      { date: "6 luglio 2026", place: "Firenze", text: "È rimasta con noi per un aperitivo. Domani forse cambierà mano." }
-    ]
-  },
-  {
-    id: "elia",
-    code: "TLT-X112",
-    name: "Elia",
-    born: "5 luglio 2026",
-    birthplace: "Napoli",
-    status: "Appena nata",
-    age: "Appena partita",
-    lastStop: "Napoli",
-    lastSignal: "ieri",
-    distanceKm: 18,
-    people: 4,
-    lat: 40.8518,
-    lng: 14.2681,
-    path: [
-      [40.8518, 14.2681],
-      [40.8399, 14.2520]
-    ],
-    passport: [
-      { city: "Napoli", date: "5 luglio 2026", note: "Prima pagina" },
-      { city: "Chiaia", date: "5 luglio 2026", note: "Primo incontro" }
-    ],
-    diary: [
-      { date: "5 luglio 2026", place: "Napoli", text: "Piccola, pesante, silenziosa. L’ho lasciata dove potesse essere notata." }
-    ]
   }
 ];
 
