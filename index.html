@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f4efe5" />
+  <meta name="description" content="Trova la Traccia — Segui il viaggio della Traccia." />
+  <title>Trova la Traccia</title>
+
+  <link rel="preconnect" href="https://unpkg.com" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQEHcgGZwMJzAd9G2jdXxyTFCCX5bsw=" crossorigin="" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="site-header" aria-label="Intestazione sito">
+    <a class="brand" href="#home" aria-label="Torna alla home">
+      <span class="brand-mark" aria-hidden="true">◆</span>
+      <span>TROVA LA TRACCIA</span>
+    </a>
+    <nav class="nav" aria-label="Navigazione principale">
+      <a href="#viaggio">Il viaggio</a>
+      <a href="#archivio">Archivio</a>
+      <a href="#cos-e">Cos’è</a>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <p class="eyebrow">ADESSO</p>
+        <div class="current-time" aria-live="polite">
+          <div id="current-date" class="current-date">6 luglio 2026</div>
+          <div id="current-hour" class="current-hour">07:42</div>
+        </div>
+
+        <h1 id="hero-title">Segui il viaggio della Traccia</h1>
+
+        <div class="hero-actions" aria-label="Azioni principali">
+          <a class="button button-primary" href="#trova">Ho trovato una Traccia</a>
+          <a class="button button-secondary" href="#viaggio">Esplora il viaggio</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="viaggio" class="map-section" aria-labelledby="map-title">
+      <div class="section-heading compact">
+        <p class="eyebrow">IL VIAGGIO DELLA TRACCIA</p>
+        <h2 id="map-title">Tracce in movimento</h2>
+      </div>
+      <div class="map-shell">
+        <div id="map" role="application" aria-label="Mappa delle Tracce"></div>
+        <div class="map-note">
+          Posizione pubblica approssimata a 50 metri.
+        </div>
+      </div>
+    </section>
+
+    <section id="archivio" class="archive-section" aria-labelledby="archive-title">
+      <div class="section-heading compact">
+        <p class="eyebrow">ARCHIVIO</p>
+        <h2 id="archive-title">Ultime Tracce</h2>
+      </div>
+      <div id="trace-grid" class="trace-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="cos-e" class="about-section" aria-labelledby="about-title">
+      <div class="about-card">
+        <p class="eyebrow">COS’È</p>
+        <h2 id="about-title">Un oggetto in viaggio.</h2>
+        <p>
+          Ogni Traccia ha un nome, un passaporto e un diario. Quando la incontri,
+          puoi aggiungere una tappa e aiutarla a continuare il suo viaggio.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <aside id="trace-panel" class="trace-panel" aria-hidden="true" aria-label="Dettaglio della Traccia">
+    <div class="panel-backdrop" data-close-panel></div>
+    <article class="panel-card" role="dialog" aria-modal="true" aria-labelledby="panel-title">
+      <button class="panel-close" type="button" data-close-panel aria-label="Chiudi">×</button>
+      <div id="panel-content"></div>
+    </article>
+  </aside>
+
+  <aside id="encounter-modal" class="trace-panel" aria-hidden="true" aria-label="Ho incontrato questa Traccia">
+    <div class="panel-backdrop" data-close-encounter></div>
+    <article class="panel-card encounter-card" role="dialog" aria-modal="true" aria-labelledby="encounter-title">
+      <button class="panel-close" type="button" data-close-encounter aria-label="Chiudi">×</button>
+      <div id="encounter-content"></div>
+    </article>
+  </aside>
+
+  <footer class="site-footer">
+    <span>TROVA LA TRACCIA</span>
+    <span>Ogni passaggio lascia un segno.</span>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
