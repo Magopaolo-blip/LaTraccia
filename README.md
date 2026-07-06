@@ -1,46 +1,8 @@
-# Trova la Traccia — v8 con Android Tracker provvisorio
+# Trova la Traccia — v9 Android Tracker
 
-Questa versione permette di usare momentaneamente un cellulare Android come Traccia provvisoria.
+Versione configurata per il progetto Firebase `trova-la-traccia`.
 
-## File inclusi
-
-- `index.html` — sito pubblico di Aurora.
-- `track.html` — pagina nascosta da aprire sul telefono Android.
-- `firebase-config.js` — configurazione Firebase da compilare.
-- `firebase-rules-template.json` — regole Firebase Realtime Database da copiare e adattare.
-
-## Cosa fa
-
-Il telefono Android invia una posizione approssimata a 50 metri a Firebase Realtime Database.
-Il sito pubblico legge la posizione e aggiorna il viaggio di Aurora.
-
-La posizione precisa del telefono non viene salvata in questa versione: `track.html` arrotonda le coordinate prima di inviarle.
-
-## Procedura
-
-### 1. Crea un progetto Firebase
-
-Vai su Firebase Console e crea un nuovo progetto.
-
-### 2. Aggiungi una Web App
-
-Nel progetto Firebase, aggiungi un'app Web e copia il blocco `firebaseConfig`.
-
-### 3. Crea un Realtime Database
-
-Nel menu Build, apri Realtime Database e crea il database.
-
-### 4. Attiva Authentication anonima
-
-Nel menu Build → Authentication → Sign-in method, abilita il provider `Anonymous`.
-
-### 5. Compila `firebase-config.js`
-
-Sostituisci i valori `INCOLLA_...` con quelli forniti da Firebase.
-
-### 6. Carica i file su GitHub
-
-Carica nel repository:
+## File da caricare su GitHub
 
 - `index.html`
 - `track.html`
@@ -48,48 +10,25 @@ Carica nel repository:
 - `firebase-rules-template.json`
 - `README.md`
 
-### 7. Apri la pagina tracker sul telefono
+## Link pubblici
 
-Apri sul tuo Android:
+Sito:
 
-```text
-https://magopaolo-blip.github.io/LaTraccia/track.html
-```
+`https://magopaolo-blip.github.io/LaTraccia/`
 
-La pagina mostrerà un UID anonimo del telefono.
+Tracker Android:
 
-### 8. Inserisci l'UID nelle Rules
+`https://magopaolo-blip.github.io/LaTraccia/track.html`
 
-Apri Firebase → Realtime Database → Rules.
+## Passi Firebase ancora necessari
 
-Copia il contenuto di `firebase-rules-template.json` e sostituisci:
+1. Attivare Realtime Database.
+2. Attivare Authentication anonima.
+3. Aprire `track.html` dal telefono Android.
+4. Copiare l'UID generato.
+5. Inserire l'UID nelle Rules Firebase.
+6. Avviare la geolocalizzazione dal telefono.
 
-```text
-INCOLLA_QUI_UID_DEL_TELEFONO_ANDROID
-```
+## Regole provvisorie
 
-con l'UID mostrato in `track.html`.
-
-Poi pubblica le Rules.
-
-### 9. Avvia il tracker
-
-Dal telefono premi:
-
-```text
-Avvia geolocalizzazione
-```
-
-Il sito pubblico inizierà ad aggiornarsi.
-
-## Nota importante
-
-Questa è una soluzione provvisoria per testare l'esperienza.
-
-Limiti:
-
-- Android può sospendere il browser in background.
-- Il telefono deve restare acceso e la pagina aperta.
-- Non è una soluzione definitiva di tracking.
-
-Per il prototipo è sufficiente. Per il prodotto finale servirà un tracker dedicato oppure un'app/servizio più stabile in background.
+Il file `firebase-rules-template.json` contiene il modello sicuro da usare dopo aver copiato l'UID Android.
