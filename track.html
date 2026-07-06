@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aurora Tracker — Trova la Traccia</title>
+  <style>
+    :root{--paper:#f7f0e2;--paper2:#fffaf0;--ink:#15130f;--muted:#655b50;--gold:#a77a2b;--black:#11100d;--line:#d7cab8;--red:#8c3328;--green:#2f6b45;--serif:Georgia,'Times New Roman',serif;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+    *{box-sizing:border-box} body{margin:0;background:linear-gradient(rgba(167,122,43,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(167,122,43,.045) 1px,transparent 1px),var(--paper);background-size:28px 28px;font-family:var(--sans);color:var(--ink)}
+    .wrap{width:min(760px,calc(100% - 28px));margin:0 auto;padding:28px 0 50px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}.brand{letter-spacing:.22em;text-transform:uppercase;font-size:12px;font-weight:850}.badge{border:1px solid rgba(167,122,43,.35);color:#705221;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:800}.hero{border:1px solid rgba(78,57,31,.22);background:linear-gradient(135deg,rgba(255,252,246,.9),rgba(241,230,211,.68));border-radius:28px;padding:28px;box-shadow:0 24px 80px rgba(61,45,23,.12)}.eyebrow{color:var(--gold);letter-spacing:.28em;text-transform:uppercase;font-size:11px;font-weight:850;margin-bottom:12px}h1{font-family:var(--serif);font-size:clamp(42px,12vw,82px);line-height:.95;margin:0 0 12px;letter-spacing:.08em;text-transform:uppercase}p{line-height:1.55;color:var(--muted)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}.tile{border:1px solid rgba(78,57,31,.16);background:rgba(255,250,240,.64);border-radius:18px;padding:16px}.tile span{display:block;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;font-size:10px;font-weight:850;margin-bottom:8px}.tile strong{font-family:var(--serif);font-size:25px;font-weight:400;word-break:break-word}.actions{display:grid;gap:12px;margin-top:20px}.btn{width:100%;min-height:54px;border-radius:999px;border:1px solid rgba(21,19,15,.24);background:transparent;color:var(--ink);font-weight:850;letter-spacing:.12em;text-transform:uppercase;font-size:12px;cursor:pointer}.btn.dark{background:var(--black);color:var(--paper2);border-color:var(--black)}.btn.stop{border-color:rgba(140,51,40,.45);color:var(--red)}label{display:block;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;font-size:10px;font-weight:850;margin:18px 0 8px}input,select{width:100%;border:1px solid rgba(78,57,31,.22);border-radius:16px;background:#fffaf1;padding:14px 16px;color:var(--ink);outline:none}.log{margin-top:18px;background:#16130f;color:#f7f0e2;border-radius:20px;padding:16px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.6;white-space:pre-wrap;max-height:220px;overflow:auto}.warn{border-left:3px solid var(--gold);padding:10px 0 10px 14px;color:#5e554b}.ok{color:var(--green)}.bad{color:var(--red)}.small{font-size:12px;color:#776d63}.uid{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;background:#fff6e7;border:1px solid rgba(78,57,31,.16);border-radius:12px;padding:10px;word-break:break-all}.hidden{display:none}@media(max-width:650px){.top{align-items:flex-start;flex-direction:column}.grid{grid-template-columns:1fr}.hero{padding:22px;border-radius:24px}.tile strong{font-size:22px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="top"><div class="brand">Trova la Traccia</div><div class="badge">Pagina nascosta · Tracker</div></div>
+    <section class="hero">
+      <div class="eyebrow">Aurora provvisoria</div>
+      <h1>Tracker</h1>
+      <p>Apri questa pagina sul tuo Android per usare il telefono come Traccia provvisoria. Il browser invierà a Firebase una posizione già approssimata a 50 metri.</p>
+      <p class="warn">Per il test tieni questa pagina aperta. Android può sospendere il browser in background: per una prova affidabile lascia lo schermo attivo o controlla ogni tanto questa schermata.</p>
+
+      <label>UID anonimo del telefono</label>
+      <div class="uid" id="uidBox">In attesa di Firebase Authentication...</div>
+      <button class="btn" id="copyUid" type="button">Copia UID per le Rules</button>
+
+      <label for="locationLabel">Nome pubblico della tappa</label>
+      <input id="locationLabel" value="Roma" placeholder="Roma, Terracina, Libreria..., Evento..." />
+
+      <label for="state">Stato pubblico</label>
+      <select id="state">
+        <option>In viaggio</option>
+        <option>In custodia</option>
+        <option>In attesa</option>
+      </select>
+
+      <div class="grid">
+        <div class="tile"><span>Stato</span><strong id="status">Fermo</strong></div>
+        <div class="tile"><span>Ultimo invio</span><strong id="lastSend">—</strong></div>
+        <div class="tile"><span>Precisione GPS</span><strong id="accuracy">—</strong></div>
+        <div class="tile"><span>Batteria</span><strong id="battery">—</strong></div>
+        <div class="tile"><span>Lat pubblica</span><strong id="latPublic">—</strong></div>
+        <div class="tile"><span>Lng pubblica</span><strong id="lngPublic">—</strong></div>
+      </div>
+
+      <div class="actions">
+        <button class="btn dark" id="startBtn" type="button">Avvia geolocalizzazione</button>
+        <button class="btn stop" id="stopBtn" type="button" disabled>Interrompi invio</button>
+        <a class="btn" href="index.html" target="_blank" rel="noopener">Apri sito pubblico</a>
+      </div>
+      <div class="log" id="log">Log pronto.</div>
+      <p class="small">Nota: questa è una soluzione provvisoria. Il sistema definitivo userà un tracker dedicato o un’app stabile in background.</p>
+    </section>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js';
+    import { getDatabase, ref, set, push } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js';
+    import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js';
+    import { firebaseConfig, TRACE_ID, PUBLIC_APPROXIMATION_METERS } from './firebase-config.js';
+
+    const $ = id => document.getElementById(id);
+    const logEl = $('log');
+    const isConfigured = firebaseConfig && firebaseConfig.apiKey && !firebaseConfig.apiKey.includes('INCOLLA');
+    let app, db, auth, user = null, watchId = null, lastWrite = 0, batteryPercent = null;
+
+    function log(message){
+      const line = `[${new Date().toLocaleTimeString('it-IT')}] ${message}`;
+      logEl.textContent = `${line}\n${logEl.textContent}`.slice(0, 6000);
+    }
+    function setStatus(text, good=false){
+      $('status').textContent = text;
+      $('status').className = good ? 'ok' : '';
+    }
+    function approx(lat, lng, meters){
+      const latStep = meters / 111320;
+      const lngStep = meters / (111320 * Math.cos(lat * Math.PI / 180));
+      return {
+        lat: Math.round(lat / latStep) * latStep,
+        lng: Math.round(lng / lngStep) * lngStep
+      };
+    }
+    async function initBattery(){
+      try{
+        if('getBattery' in navigator){
+          const b = await navigator.getBattery();
+          const update = () => { batteryPercent = Math.round(b.level * 100); $('battery').textContent = `${batteryPercent}%`; };
+          update(); b.addEventListener('levelchange', update);
+        }else $('battery').textContent = 'n/d';
+      }catch{ $('battery').textContent = 'n/d'; }
+    }
+    async function initFirebase(){
+      if(!isConfigured){
+        $('uidBox').textContent = 'firebase-config.js non è ancora compilato.';
+        setStatus('Config mancante');
+        log('Compila firebase-config.js con i dati della tua Web App Firebase.');
+        return;
+      }
+      app = initializeApp(firebaseConfig);
+      db = getDatabase(app);
+      auth = getAuth(app);
+      onAuthStateChanged(auth, u => {
+        if(u){ user = u; $('uidBox').textContent = u.uid; setStatus('Autenticato', true); log(`UID Android: ${u.uid}`); }
+      });
+      try{ await signInAnonymously(auth); }catch(error){ log(`Errore Authentication: ${error.message}`); setStatus('Auth errore'); }
+    }
+    async function writePosition(position){
+      if(!db || !user){ log('Firebase/Auth non pronti.'); return; }
+      const now = Date.now();
+      if(now - lastWrite < 55000){ return; }
+      lastWrite = now;
+      const rawLat = position.coords.latitude;
+      const rawLng = position.coords.longitude;
+      const rounded = approx(rawLat, rawLng, PUBLIC_APPROXIMATION_METERS || 50);
+      const payload = {
+        lat: Number(rounded.lat.toFixed(6)),
+        lng: Number(rounded.lng.toFixed(6)),
+        accuracy: Math.round(position.coords.accuracy || 0),
+        locationLabel: $('locationLabel').value.trim() || 'Tappa in corso',
+        state: $('state').value,
+        sentAt: new Date().toISOString(),
+        source: 'android-browser-prototype',
+        approximationMeters: PUBLIC_APPROXIMATION_METERS || 50,
+        battery: batteryPercent
+      };
+      $('latPublic').textContent = payload.lat;
+      $('lngPublic').textContent = payload.lng;
+      $('accuracy').textContent = payload.accuracy ? `${payload.accuracy} m` : 'n/d';
+      try{
+        await set(ref(db, `traces/${TRACE_ID}/current`), payload);
+        await push(ref(db, `traces/${TRACE_ID}/positions`), payload);
+        $('lastSend').textContent = new Date().toLocaleTimeString('it-IT', {hour:'2-digit', minute:'2-digit'});
+        setStatus('Invio attivo', true);
+        log(`Inviato: ${payload.locationLabel} · ${payload.lat}, ${payload.lng}`);
+      }catch(error){
+        setStatus('Scrittura negata');
+        log(`Errore scrittura Firebase: ${error.message}`);
+        log('Controlla le Rules e l\'UID del telefono.');
+      }
+    }
+    function startTracking(){
+      if(!('geolocation' in navigator)){ log('Geolocalizzazione non supportata da questo browser.'); return; }
+      setStatus('Richiesta GPS');
+      log('Richiesta permesso posizione...');
+      watchId = navigator.geolocation.watchPosition(
+        writePosition,
+        error => { setStatus('GPS errore'); log(`Errore GPS: ${error.message}`); },
+        { enableHighAccuracy:true, maximumAge:15000, timeout:25000 }
+      );
+      $('startBtn').disabled = true;
+      $('stopBtn').disabled = false;
+    }
+    function stopTracking(){
+      if(watchId !== null) navigator.geolocation.clearWatch(watchId);
+      watchId = null;
+      $('startBtn').disabled = false;
+      $('stopBtn').disabled = true;
+      setStatus('Fermo');
+      log('Invio interrotto.');
+    }
+    $('startBtn').addEventListener('click', startTracking);
+    $('stopBtn').addEventListener('click', stopTracking);
+    $('copyUid').addEventListener('click', async () => {
+      const uid = $('uidBox').textContent.trim();
+      try{ await navigator.clipboard.writeText(uid); log('UID copiato negli appunti.'); }catch{ log('Impossibile copiare automaticamente. Seleziona e copia manualmente UID.'); }
+    });
+    initBattery();
+    initFirebase();
+  </script>
+</body>
+</html>

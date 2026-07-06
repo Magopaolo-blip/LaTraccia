@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "traces": {
+      "aurora": {
+        ".read": true,
+        ".write": "auth != null && auth.uid === 'INCOLLA_QUI_UID_DEL_TELEFONO_ANDROID'"
+      }
+    }
+  }
+}

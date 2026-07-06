@@ -19,302 +19,47 @@
       --serif: Georgia, 'Times New Roman', serif;
       --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
-
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
-      margin:0;
-      color:var(--ink);
+      margin:0;color:var(--ink);
       background:
         linear-gradient(rgba(167,122,43,.055) 1px, transparent 1px),
         linear-gradient(90deg, rgba(167,122,43,.045) 1px, transparent 1px),
         radial-gradient(circle at 16% 8%, rgba(167,122,43,.13), transparent 28%),
         radial-gradient(circle at 92% 20%, rgba(0,0,0,.045), transparent 24%),
         var(--paper);
-      background-size:28px 28px, 28px 28px, auto, auto, auto;
-      font-family:var(--sans);
-      overflow-x:hidden;
+      background-size:28px 28px,28px 28px,auto,auto,auto;
+      font-family:var(--sans);overflow-x:hidden;
     }
-
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background:radial-gradient(circle at center, transparent 52%, rgba(38,28,15,.075));
-      z-index:0;
-    }
-
-    a{color:inherit;text-decoration:none}
-    button,input,textarea{font:inherit}
-
-    .site-header{
-      position:sticky;
-      top:0;
-      z-index:20;
-      height:58px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:0 clamp(18px,4vw,56px);
-      border-bottom:1px solid rgba(90,71,45,.16);
-      background:rgba(247,240,226,.82);
-      backdrop-filter:blur(16px);
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      letter-spacing:.28em;
-      font-size:12px;
-      font-weight:800;
-      text-transform:uppercase;
-    }
-    .brand-mark{
-      width:14px;height:14px;position:relative;display:inline-block;flex:0 0 auto;
-    }
-    .brand-mark::before,.brand-mark::after{
-      content:"";position:absolute;inset:0;margin:auto;background:var(--gold);
-    }
-    .brand-mark::before{width:14px;height:2px;top:6px}
-    .brand-mark::after{height:14px;width:2px;left:6px}
-    nav{display:flex;gap:28px;align-items:center;font-size:14px;color:#4f473d}
-    nav a{opacity:.86} nav a:hover{opacity:1;color:var(--gold)}
-
-    .wrap{position:relative;z-index:1;width:min(1180px, calc(100% - 40px));margin:0 auto}
-
-    .hero{
-      min-height:calc(100svh - 58px);
-      display:grid;
-      grid-template-columns:minmax(420px, 1fr) minmax(360px, 500px);
-      align-items:center;
-      gap:56px;
-      padding:54px 0 62px;
-    }
-    .hero-main{padding-left:clamp(0px,2vw,28px)}
-    .eyebrow{
-      letter-spacing:.34em;
-      text-transform:uppercase;
-      color:var(--gold);
-      font-size:12px;
-      font-weight:800;
-      margin-bottom:14px;
-    }
-    .date{
-      font-family:var(--serif);
-      font-size:clamp(42px, 6vw, 76px);
-      line-height:.95;
-      letter-spacing:.045em;
-      margin:0;
-      text-transform:uppercase;
-    }
-    .time{
-      font-family:var(--serif);
-      font-size:clamp(56px, 8vw, 104px);
-      line-height:.92;
-      letter-spacing:.03em;
-      margin:8px 0 22px;
-    }
-    .headline{
-      font-family:var(--serif);
-      font-size:clamp(34px,4.7vw,66px);
-      line-height:1.02;
-      letter-spacing:-.035em;
-      max-width:760px;
-      margin:0 0 26px;
-    }
-    .actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      min-height:48px;
-      padding:0 24px;
-      border-radius:999px;
-      border:1px solid rgba(21,19,15,.24);
-      background:transparent;
-      color:var(--ink);
-      font-size:12px;
-      font-weight:850;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      cursor:pointer;
-      transition:transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
-    }
-    .btn:hover{transform:translateY(-2px);border-color:rgba(21,19,15,.45)}
-    .btn.dark{background:var(--black);color:var(--paper-2);border-color:var(--black);box-shadow:0 16px 32px rgba(0,0,0,.12)}
-    .btn.dark:hover{background:#2b241a}
-
-    .trace-card{
-      position:relative;
-      border:1px solid rgba(78,57,31,.22);
-      background:linear-gradient(135deg, rgba(255,252,246,.85), rgba(241,230,211,.62));
-      border-radius:28px;
-      box-shadow:var(--shadow);
-      padding:34px;
-      overflow:hidden;
-    }
-    .trace-card::before{
-      content:"";
-      position:absolute;right:-90px;top:-90px;width:260px;height:260px;
-      border:1px solid rgba(167,122,43,.25);border-radius:50%;
-    }
-    .trace-card::after{
-      content:"";
-      position:absolute;right:40px;top:40px;width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 14px rgba(167,122,43,.08);
-    }
-    .trace-label{color:var(--gold);font-size:11px;letter-spacing:.32em;text-transform:uppercase;font-weight:850;margin-bottom:24px}
-    .aurora-title{
-      font-family:var(--serif);
-      font-size:clamp(44px,5vw,78px);
-      letter-spacing:.16em;
-      margin:0 0 4px;
-      line-height:1;
-      text-transform:uppercase;
-    }
-    .status{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(167,122,43,.28);border-radius:999px;padding:5px 11px;font-size:12px;color:#73552b;background:rgba(255,255,255,.38);margin:8px 0 20px}
-    .status-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 7px rgba(167,122,43,.12)}
-    .trace-card p{font-family:var(--serif);font-size:22px;line-height:1.32;color:#3c362e;margin:0 0 28px;max-width:360px}
-    .metrics{display:grid;grid-template-columns:repeat(3, 1fr);border-top:1px solid rgba(90,71,45,.18);padding-top:24px;gap:18px}
-    .metric span{display:block;color:var(--muted);font-size:10px;font-weight:850;letter-spacing:.25em;text-transform:uppercase;margin-bottom:8px}
-    .metric strong{font-family:var(--serif);font-size:22px;font-weight:400}
-
-    .section{padding:34px 0 86px}
-    .section-title{display:flex;align-items:center;gap:14px;margin-bottom:18px;color:var(--gold);font-size:12px;font-weight:850;letter-spacing:.28em;text-transform:uppercase}
-    .section-title::before{content:"";width:34px;height:1px;background:var(--gold)}
-
-    .map-card{
-      position:relative;
-      height:min(500px, 54vw);
-      min-height:360px;
-      border-radius:28px;
-      border:1px solid rgba(78,57,31,.22);
-      overflow:hidden;
-      background:#efe5d3;
-      box-shadow:var(--shadow);
-    }
-    .map-card svg{width:100%;height:100%;display:block}
-    .map-note{
-      position:absolute;left:22px;bottom:20px;
-      background:rgba(251,247,239,.88);border:1px solid rgba(78,57,31,.14);border-radius:999px;
-      padding:10px 14px;font-size:12px;color:#675d50;backdrop-filter:blur(8px)
-    }
-    .map-control{
-      position:absolute;right:22px;bottom:20px;width:46px;height:46px;border-radius:50%;
-      border:1px solid rgba(78,57,31,.2);background:rgba(251,247,239,.9);display:grid;place-items:center;
-      color:#4b4036;font-size:20px;
-    }
-    .map-heading{
-      position:absolute;left:34px;top:26px;
-      font-family:var(--serif);font-size:clamp(26px,3.2vw,44px);line-height:1.02;
-    }
-    .map-heading small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:850;margin-bottom:8px}
-
-    .passport{
-      display:grid;
-      grid-template-columns:220px 1fr 220px;
-      align-items:center;
-      min-height:150px;
-      border:1px solid rgba(78,57,31,.22);
-      border-radius:22px;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(167,122,43,.12), transparent 24%),
-        linear-gradient(90deg, rgba(167,122,43,.08), transparent 30%, rgba(0,0,0,.04)),
-        #f5ebd8;
-      box-shadow:0 18px 58px rgba(61,45,23,.10);
-      overflow:hidden;
-    }
-    .stamp-area{height:100%;display:grid;place-items:center;border-right:1px dashed rgba(78,57,31,.26);color:rgba(100,78,45,.45)}
-    .stamp{
-      width:92px;height:92px;border:2px solid rgba(100,78,45,.34);border-radius:50%;display:grid;place-items:center;
-      font-size:10px;letter-spacing:.2em;text-align:center;text-transform:uppercase;transform:rotate(-8deg)
-    }
-    .passport-main{padding:28px 34px}
-    .passport-main h3{font-family:var(--serif);font-size:32px;margin:0 0 4px;font-weight:400;letter-spacing:.04em;text-transform:uppercase}
-    .passport-main p{margin:0;color:#5d5144;font-size:17px;line-height:1.5}
-    .passport-code{height:100%;display:grid;place-items:center;border-left:1px dashed rgba(78,57,31,.22);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(69,54,35,.62);text-align:center;line-height:1.7}
-
-    .diary-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:28px;align-items:stretch}
-    .quote-card,.note-card{
-      border:1px solid rgba(78,57,31,.19);border-radius:28px;background:rgba(251,247,239,.72);box-shadow:0 18px 58px rgba(61,45,23,.08);padding:34px;
-    }
-    .quote-card{display:grid;place-items:center;text-align:center;min-height:260px}
-    .quote-card blockquote{font-family:var(--serif);font-size:clamp(26px,3vw,44px);line-height:1.18;margin:0;max-width:620px}
-    .quote-card blockquote::before,.quote-card blockquote::after{color:var(--gold);font-size:1.2em}
-    .quote-card blockquote::before{content:"“"}.quote-card blockquote::after{content:"”"}
-    .note-card small{display:block;color:var(--gold);font-size:11px;font-weight:850;letter-spacing:.28em;text-transform:uppercase;margin-bottom:22px}
-    .note-card p{font-family:var(--serif);font-size:24px;line-height:1.35;margin:0 0 22px;color:#332c24}
-    .note-card em{color:#6c6258;font-size:14px}
-
-    .cta-band{
-      margin:10px 0 94px;
-      border-radius:30px;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(217,184,106,.2), transparent 30%),
-        linear-gradient(135deg,#11100d,#252016);
-      color:var(--paper-2);
-      min-height:230px;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      padding:34px;
-      box-shadow:0 30px 90px rgba(0,0,0,.22);
-    }
-    .cta-band h2{font-family:var(--serif);font-size:clamp(30px,4vw,56px);font-weight:400;margin:0 0 18px;letter-spacing:.06em;text-transform:uppercase}
-    .cta-band .btn{color:var(--paper-2);border-color:rgba(255,255,255,.35)}
-    .cta-band .btn:hover{background:rgba(255,255,255,.1)}
-
-    .about{padding:0 0 90px;display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;color:#3b332b}
-    .about h2{font-family:var(--serif);font-size:clamp(36px,4vw,58px);font-weight:400;margin:0;letter-spacing:-.035em}
-    .about p{font-size:18px;line-height:1.7;margin:0;color:#5c5146}
-
-    footer{border-top:1px solid rgba(90,71,45,.16);padding:28px clamp(18px,4vw,56px);display:flex;justify-content:space-between;gap:20px;color:#6d6257;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
-
-    .modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(18,15,11,.58);backdrop-filter:blur(8px)}
-    .modal.active{display:flex}
-    .modal-box{width:min(620px,100%);background:var(--paper-2);border-radius:28px;border:1px solid rgba(78,57,31,.22);box-shadow:0 35px 100px rgba(0,0,0,.34);padding:30px;position:relative}
-    .modal-box h2{font-family:var(--serif);font-size:40px;font-weight:400;margin:0 0 12px}
-    .modal-box p{color:#5f554a;line-height:1.6;margin:0 0 22px}
-    .close{position:absolute;right:18px;top:18px;border:0;background:transparent;font-size:28px;cursor:pointer;color:#63584e}
-    .form-row{display:grid;gap:8px;margin:14px 0}
-    label{font-size:11px;text-transform:uppercase;letter-spacing:.2em;font-weight:850;color:var(--gold)}
-    input,textarea{width:100%;border:1px solid rgba(78,57,31,.22);border-radius:16px;background:#fffaf1;padding:14px 16px;color:var(--ink);outline:none}
-    textarea{min-height:110px;resize:vertical}
-
-    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(30px);opacity:0;pointer-events:none;background:#11100d;color:var(--paper-2);padding:14px 18px;border-radius:999px;z-index:60;font-size:14px;transition:.25s ease}
-    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-    @media (max-width: 900px){
-      .site-header{height:56px;padding:0 18px}.brand{letter-spacing:.18em;font-size:11px}nav{gap:16px;font-size:13px}.hide-sm{display:none}
-      .wrap{width:min(100% - 28px, 680px)}
-      .hero{min-height:auto;grid-template-columns:1fr;gap:24px;padding:42px 0 44px}.hero-main{padding-left:0;text-align:left}
-      .date{font-size:45px}.time{font-size:62px}.headline{font-size:38px}.actions{justify-content:flex-start}
-      .trace-card{padding:25px;border-radius:24px}.aurora-title{font-size:48px}.trace-card p{font-size:20px}.metrics{grid-template-columns:1fr;gap:14px}
-      .section{padding:28px 0 58px}.map-card{height:420px;min-height:420px;border-radius:22px}.map-heading{left:22px;top:20px}.map-note{left:14px;right:14px;bottom:14px;text-align:center}.map-control{display:none}
-      .passport{grid-template-columns:1fr}.stamp-area,.passport-code{display:none}.passport-main{padding:25px}.passport-main h3{font-size:28px}
-      .diary-grid{grid-template-columns:1fr}.quote-card,.note-card{padding:25px;border-radius:22px}.quote-card{min-height:220px}
-      .about{grid-template-columns:1fr;gap:18px;padding-bottom:58px}
-      footer{flex-direction:column;padding:24px 18px}
-    }
-
-    @media (max-width: 520px){
-      nav a:not(:first-child){display:none}
-      .hero{text-align:center}.hero-main{text-align:center}.actions{justify-content:center}.date{font-size:34px}.time{font-size:58px}.headline{font-size:34px}
-      .btn{width:100%;min-height:50px}.trace-card{text-align:left}.metric strong{font-size:20px}
-      .section-title{font-size:11px}.map-card{height:390px;min-height:390px}.map-heading{font-size:30px}
-      .cta-band h2{font-size:28px}.cta-band{padding:24px;min-height:220px}.modal-box{padding:24px}.modal-box h2{font-size:32px}
-    }
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at center,transparent 52%,rgba(38,28,15,.075));z-index:0}
+    a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}
+    .site-header{position:sticky;top:0;z-index:20;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,4vw,56px);border-bottom:1px solid rgba(90,71,45,.16);background:rgba(247,240,226,.82);backdrop-filter:blur(16px)}
+    .brand{display:flex;align-items:center;gap:12px;letter-spacing:.28em;font-size:12px;font-weight:800;text-transform:uppercase}
+    .brand-mark{width:14px;height:14px;position:relative;display:inline-block;flex:0 0 auto}.brand-mark::before,.brand-mark::after{content:"";position:absolute;inset:0;margin:auto;background:var(--gold)}.brand-mark::before{width:14px;height:2px;top:6px}.brand-mark::after{height:14px;width:2px;left:6px}
+    nav{display:flex;gap:28px;align-items:center;font-size:14px;color:#4f473d}nav a{opacity:.86}nav a:hover{opacity:1;color:var(--gold)}
+    .wrap{position:relative;z-index:1;width:min(1180px,calc(100% - 40px));margin:0 auto}
+    .hero{min-height:calc(100svh - 58px);display:grid;grid-template-columns:minmax(420px,1fr) minmax(360px,500px);align-items:center;gap:56px;padding:54px 0 62px}.hero-main{padding-left:clamp(0px,2vw,28px)}
+    .eyebrow{letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-size:12px;font-weight:800;margin-bottom:14px}.date{font-family:var(--serif);font-size:clamp(42px,6vw,76px);line-height:.95;letter-spacing:.045em;margin:0;text-transform:uppercase}.time{font-family:var(--serif);font-size:clamp(56px,8vw,104px);line-height:.92;letter-spacing:.03em;margin:8px 0 22px}.headline{font-family:var(--serif);font-size:clamp(34px,4.7vw,66px);line-height:1.02;letter-spacing:-.035em;max-width:760px;margin:0 0 26px}
+    .actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px;border-radius:999px;border:1px solid rgba(21,19,15,.24);background:transparent;color:var(--ink);font-size:12px;font-weight:850;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:transform .2s ease,background .2s ease,color .2s ease,border-color .2s ease}.btn:hover{transform:translateY(-2px);border-color:rgba(21,19,15,.45)}.btn.dark{background:var(--black);color:var(--paper-2);border-color:var(--black);box-shadow:0 16px 32px rgba(0,0,0,.12)}.btn.dark:hover{background:#2b241a}
+    .trace-card{position:relative;border:1px solid rgba(78,57,31,.22);background:linear-gradient(135deg,rgba(255,252,246,.85),rgba(241,230,211,.62));border-radius:28px;box-shadow:var(--shadow);padding:34px;overflow:hidden}.trace-card::before{content:"";position:absolute;right:-90px;top:-90px;width:260px;height:260px;border:1px solid rgba(167,122,43,.25);border-radius:50%}.trace-card::after{content:"";position:absolute;right:40px;top:40px;width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 14px rgba(167,122,43,.08)}
+    .trace-label{color:var(--gold);font-size:11px;letter-spacing:.32em;text-transform:uppercase;font-weight:850;margin-bottom:24px}.aurora-title{font-family:var(--serif);font-size:clamp(44px,5vw,78px);letter-spacing:.16em;margin:0 0 4px;line-height:1;text-transform:uppercase}.status{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(167,122,43,.28);border-radius:999px;padding:5px 11px;font-size:12px;color:#73552b;background:rgba(255,255,255,.38);margin:8px 0 20px}.status-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 7px rgba(167,122,43,.12)}.trace-card p{font-family:var(--serif);font-size:22px;line-height:1.32;color:#3c362e;margin:0 0 28px;max-width:360px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(90,71,45,.18);padding-top:24px;gap:18px}.metric span{display:block;color:var(--muted);font-size:10px;font-weight:850;letter-spacing:.25em;text-transform:uppercase;margin-bottom:8px}.metric strong{font-family:var(--serif);font-size:22px;font-weight:400}.live-pill{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:12px;color:#5f554a}.live-pill .pulse{width:8px;height:8px;border-radius:50%;background:#9d762f;box-shadow:0 0 0 0 rgba(167,122,43,.45);animation:pulse 2s infinite}@keyframes pulse{70%{box-shadow:0 0 0 12px rgba(167,122,43,0)}100%{box-shadow:0 0 0 0 rgba(167,122,43,0)}}
+    .section{padding:34px 0 86px}.section-title{display:flex;align-items:center;gap:14px;margin-bottom:18px;color:var(--gold);font-size:12px;font-weight:850;letter-spacing:.28em;text-transform:uppercase}.section-title::before{content:"";width:34px;height:1px;background:var(--gold)}
+    .map-card{position:relative;height:min(500px,54vw);min-height:360px;border-radius:28px;border:1px solid rgba(78,57,31,.22);overflow:hidden;background:#efe5d3;box-shadow:var(--shadow)}.osm-frame{position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(.38) sepia(.30) saturate(.85) contrast(.96);opacity:.82}.map-card::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(247,240,226,.75),rgba(247,240,226,.08) 42%,rgba(247,240,226,.18)),radial-gradient(circle at 36% 48%,rgba(167,122,43,.18),transparent 20%)}.map-heading{position:absolute;left:34px;top:26px;z-index:2;font-family:var(--serif);font-size:clamp(26px,3.2vw,44px);line-height:1.02}.map-heading small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:850;margin-bottom:8px}.map-note{position:absolute;left:22px;bottom:20px;z-index:2;background:rgba(251,247,239,.88);border:1px solid rgba(78,57,31,.14);border-radius:999px;padding:10px 14px;font-size:12px;color:#675d50;backdrop-filter:blur(8px)}.map-control{position:absolute;right:22px;bottom:20px;z-index:2;border:1px solid rgba(78,57,31,.2);background:rgba(251,247,239,.9);border-radius:999px;padding:12px 16px;color:#4b4036;font-size:12px;font-weight:850;letter-spacing:.12em;text-transform:uppercase}.map-control:hover{color:var(--gold)}
+    .passport{display:grid;grid-template-columns:220px 1fr 220px;align-items:center;min-height:150px;border:1px solid rgba(78,57,31,.22);border-radius:22px;background:radial-gradient(circle at 20% 30%,rgba(167,122,43,.12),transparent 24%),linear-gradient(90deg,rgba(167,122,43,.08),transparent 30%,rgba(0,0,0,.04)),#f5ebd8;box-shadow:0 18px 58px rgba(61,45,23,.10);overflow:hidden}.stamp-area{height:100%;display:grid;place-items:center;border-right:1px dashed rgba(78,57,31,.26);color:rgba(100,78,45,.45)}.stamp{width:92px;height:92px;border:2px solid rgba(100,78,45,.34);border-radius:50%;display:grid;place-items:center;font-size:10px;letter-spacing:.2em;text-align:center;text-transform:uppercase;transform:rotate(-8deg)}.passport-main{padding:28px 34px}.passport-main h3{font-family:var(--serif);font-size:32px;margin:0 0 4px;font-weight:400;letter-spacing:.04em;text-transform:uppercase}.passport-main p{margin:0;color:#5d5144;font-size:17px;line-height:1.5}.passport-code{height:100%;display:grid;place-items:center;border-left:1px dashed rgba(78,57,31,.22);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(69,54,35,.62);text-align:center;line-height:1.7}
+    .diary-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:28px;align-items:stretch}.quote-card,.note-card{border:1px solid rgba(78,57,31,.19);border-radius:28px;background:rgba(251,247,239,.72);box-shadow:0 18px 58px rgba(61,45,23,.08);padding:34px}.quote-card{display:grid;place-items:center;text-align:center;min-height:260px}.quote-card blockquote{font-family:var(--serif);font-size:clamp(26px,3vw,44px);line-height:1.18;margin:0;max-width:620px}.quote-card blockquote::before,.quote-card blockquote::after{color:var(--gold);font-size:1.2em}.quote-card blockquote::before{content:"“"}.quote-card blockquote::after{content:"”"}.note-card small{display:block;color:var(--gold);font-size:11px;font-weight:850;letter-spacing:.28em;text-transform:uppercase;margin-bottom:22px}.note-card p{font-family:var(--serif);font-size:24px;line-height:1.35;margin:0 0 22px;color:#332c24}.note-card em{color:#6c6258;font-size:14px}.cta-band{margin:10px 0 94px;border-radius:30px;background:radial-gradient(circle at 50% 0%,rgba(217,184,106,.2),transparent 30%),linear-gradient(135deg,#11100d,#252016);color:var(--paper-2);min-height:230px;display:grid;place-items:center;text-align:center;padding:34px;box-shadow:0 30px 90px rgba(0,0,0,.22)}.cta-band h2{font-family:var(--serif);font-size:clamp(30px,4vw,56px);font-weight:400;margin:0 0 18px;letter-spacing:.06em;text-transform:uppercase}.cta-band .btn{color:var(--paper-2);border-color:rgba(255,255,255,.35)}.cta-band .btn:hover{background:rgba(255,255,255,.1)}.about{padding:0 0 90px;display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;color:#3b332b}.about h2{font-family:var(--serif);font-size:clamp(36px,4vw,58px);font-weight:400;margin:0;letter-spacing:-.035em}.about p{font-size:18px;line-height:1.7;margin:0;color:#5c5146}footer{border-top:1px solid rgba(90,71,45,.16);padding:28px clamp(18px,4vw,56px);display:flex;justify-content:space-between;gap:20px;color:#6d6257;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+    .modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(18,15,11,.58);backdrop-filter:blur(8px)}.modal.active{display:flex}.modal-box{width:min(620px,100%);background:var(--paper-2);border-radius:28px;border:1px solid rgba(78,57,31,.22);box-shadow:0 35px 100px rgba(0,0,0,.34);padding:30px;position:relative}.modal-box h2{font-family:var(--serif);font-size:40px;font-weight:400;margin:0 0 12px}.modal-box p{color:#5f554a;line-height:1.6;margin:0 0 22px}.close{position:absolute;right:18px;top:18px;border:0;background:transparent;font-size:28px;cursor:pointer;color:#63584e}.form-row{display:grid;gap:8px;margin:14px 0}label{font-size:11px;text-transform:uppercase;letter-spacing:.2em;font-weight:850;color:var(--gold)}input,textarea{width:100%;border:1px solid rgba(78,57,31,.22);border-radius:16px;background:#fffaf1;padding:14px 16px;color:var(--ink);outline:none}textarea{min-height:110px;resize:vertical}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(30px);opacity:0;pointer-events:none;background:#11100d;color:var(--paper-2);padding:14px 18px;border-radius:999px;z-index:60;font-size:14px;transition:.25s ease}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    @media (max-width:900px){.site-header{height:56px;padding:0 18px}.brand{letter-spacing:.18em;font-size:11px}nav{gap:16px;font-size:13px}.hide-sm{display:none}.wrap{width:min(100% - 28px,680px)}.hero{min-height:auto;grid-template-columns:1fr;gap:24px;padding:42px 0 44px}.hero-main{padding-left:0;text-align:left}.date{font-size:45px}.time{font-size:62px}.headline{font-size:38px}.actions{justify-content:flex-start}.trace-card{padding:25px;border-radius:24px}.aurora-title{font-size:48px}.trace-card p{font-size:20px}.metrics{grid-template-columns:1fr;gap:14px}.section{padding:28px 0 58px}.map-card{height:420px;min-height:420px;border-radius:22px}.map-heading{left:22px;top:20px}.map-note{left:14px;right:14px;bottom:14px;text-align:center}.map-control{display:none}.passport{grid-template-columns:1fr}.stamp-area,.passport-code{display:none}.passport-main{padding:25px}.passport-main h3{font-size:28px}.diary-grid{grid-template-columns:1fr}.quote-card,.note-card{padding:25px;border-radius:22px}.quote-card{min-height:220px}.about{grid-template-columns:1fr;gap:18px;padding-bottom:58px}footer{flex-direction:column;padding:24px 18px}}
+    @media (max-width:520px){nav a:not(:first-child){display:none}.hero{text-align:center}.hero-main{text-align:center}.actions{justify-content:center}.date{font-size:34px}.time{font-size:58px}.headline{font-size:34px}.btn{width:100%;min-height:50px}.trace-card{text-align:left}.metric strong{font-size:20px}.section-title{font-size:11px}.map-card{height:390px;min-height:390px}.map-heading{font-size:30px}.cta-band h2{font-size:28px}.cta-band{padding:24px;min-height:220px}.modal-box{padding:24px}.modal-box h2{font-size:32px}}
   </style>
 </head>
 <body>
   <header class="site-header">
     <a class="brand" href="#top" aria-label="Trova la Traccia"><span class="brand-mark" aria-hidden="true"></span>Trova la Traccia</a>
     <nav aria-label="Navigazione principale">
-      <a href="#viaggio">Il viaggio</a>
-      <a href="#passaporto">Passaporto</a>
-      <a href="#diario">Diario</a>
-      <a class="hide-sm" href="#cose">Cos'è</a>
+      <a href="#viaggio">Il viaggio</a><a href="#passaporto">Passaporto</a><a href="#diario">Diario</a><a class="hide-sm" href="#cose">Cos'è</a>
     </nav>
   </header>
-
   <main id="top">
     <section class="wrap hero" aria-label="Introduzione">
       <div class="hero-main">
@@ -322,158 +67,115 @@
         <h1 class="date" id="currentDate">6 luglio 2026</h1>
         <div class="time" id="currentTime">09:13</div>
         <p class="headline">Segui il viaggio della Traccia</p>
-        <div class="actions">
-          <button class="btn dark" data-open-modal>Ho trovato una Traccia</button>
-          <a class="btn" href="#aurora">Segui Aurora →</a>
-        </div>
+        <div class="actions"><button class="btn dark" data-open-modal>Ho trovato una Traccia</button><a class="btn" href="#aurora">Segui Aurora →</a></div>
       </div>
-
       <article class="trace-card" id="aurora" aria-label="Aurora">
         <div class="trace-label">Prima Traccia</div>
         <h2 class="aurora-title">Aurora</h2>
-        <div class="status"><span class="status-dot"></span> In viaggio</div>
-        <p>È partita da Roma. Il suo viaggio è appena iniziato.</p>
+        <div class="status"><span class="status-dot"></span> <span id="traceState">In viaggio</span></div>
+        <p id="traceIntro">È partita da Roma. Il suo viaggio è appena iniziato.</p>
         <div class="metrics" aria-label="Dati principali di Aurora">
-          <div class="metric"><span>Ultima tappa</span><strong>Roma</strong></div>
-          <div class="metric"><span>Età del viaggio</span><strong>Appena partita</strong></div>
-          <div class="metric"><span>Incontri</span><strong>1</strong></div>
+          <div class="metric"><span>Ultima tappa</span><strong id="lastPlace">Roma</strong></div>
+          <div class="metric"><span>Ultimo segnale</span><strong id="lastSignal">demo</strong></div>
+          <div class="metric"><span>Incontri</span><strong id="encounters">1</strong></div>
         </div>
+        <div class="live-pill"><span class="pulse"></span><span id="firebaseStatus">In attesa del segnale dal telefono.</span></div>
       </article>
     </section>
-
     <section class="wrap section" id="viaggio">
       <div class="section-title">Il viaggio di Aurora</div>
-      <div class="map-card" role="img" aria-label="Mappa illustrata del viaggio di Aurora da Roma">
-        <div class="map-heading"><small>Roma, punto di partenza</small>Il viaggio è iniziato.</div>
-        <svg viewBox="0 0 1200 520" preserveAspectRatio="none" aria-hidden="true">
-          <defs>
-            <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="5" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <pattern id="paperLines" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M0 0H60M0 0V60" stroke="rgba(99,78,47,.10)" stroke-width="1"/>
-            </pattern>
-          </defs>
-          <rect width="1200" height="520" fill="#efe5d3"/>
-          <rect width="1200" height="520" fill="url(#paperLines)" opacity=".55"/>
-          <path d="M0,330 C120,310 180,280 280,300 C390,325 455,270 560,285 C650,300 720,250 805,268 C930,294 1015,230 1200,244" fill="none" stroke="rgba(92,122,104,.22)" stroke-width="34"/>
-          <path d="M0,360 C120,335 230,345 350,323 C455,304 530,330 632,315 C745,298 847,338 960,318 C1068,298 1120,326 1200,310" fill="none" stroke="rgba(92,122,104,.16)" stroke-width="22"/>
-          <path d="M94,75 C220,106 332,79 472,114 C630,154 766,92 903,128 C1018,160 1088,118 1200,150" fill="none" stroke="rgba(76,67,57,.16)" stroke-width="3"/>
-          <path d="M30,206 C188,194 242,238 385,213 C505,191 574,202 690,231 C802,260 930,202 1125,215" fill="none" stroke="rgba(76,67,57,.12)" stroke-width="2"/>
-          <path d="M50,438 C180,410 300,452 430,420 C566,386 650,446 787,410 C952,366 1050,432 1170,390" fill="none" stroke="rgba(76,67,57,.12)" stroke-width="2"/>
-          <text x="222" y="226" font-family="Georgia" font-size="30" fill="rgba(34,31,27,.72)">Roma</text>
-          <text x="120" y="120" font-family="Georgia" font-size="18" fill="rgba(34,31,27,.36)">Litorale</text>
-          <text x="610" y="180" font-family="Georgia" font-size="18" fill="rgba(34,31,27,.34)">Tivoli</text>
-          <text x="820" y="350" font-family="Georgia" font-size="18" fill="rgba(34,31,27,.33)">Frascati</text>
-          <text x="980" y="132" font-family="Georgia" font-size="18" fill="rgba(34,31,27,.30)">Sabina</text>
-          <path d="M300,258 C392,261 485,284 585,318 C648,340 716,345 780,331" fill="none" stroke="rgba(167,122,43,.64)" stroke-width="3" stroke-dasharray="0 0"/>
-          <path d="M300,258 C392,261 485,284 585,318 C648,340 716,345 780,331" fill="none" stroke="rgba(167,122,43,.26)" stroke-width="14"/>
-          <circle cx="300" cy="258" r="68" fill="none" stroke="rgba(167,122,43,.16)" stroke-width="2"/>
-          <circle cx="300" cy="258" r="38" fill="rgba(167,122,43,.10)" stroke="rgba(167,122,43,.26)"/>
-          <circle cx="300" cy="258" r="11" fill="#fff8ea" stroke="rgba(167,122,43,.85)" stroke-width="3" filter="url(#softGlow)"/>
-          <circle cx="780" cy="331" r="5" fill="rgba(167,122,43,.52)"/>
-          <path d="M0 0H1200V520H0Z" fill="none" stroke="rgba(78,57,31,.18)" stroke-width="2"/>
-        </svg>
+      <div class="map-card" aria-label="Mappa live del viaggio di Aurora">
+        <iframe class="osm-frame" id="osmFrame" title="Mappa approssimata di Aurora" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=12.4690%2C41.8870%2C12.5090%2C41.9070&layer=mapnik&marker=41.8978%2C12.4895"></iframe>
+        <div class="map-heading"><small id="mapSmall">Roma, punto di partenza</small><span id="mapTitle">Il viaggio è iniziato.</span></div>
         <div class="map-note">Posizione pubblica approssimata a 50 metri.</div>
-        <div class="map-control" aria-hidden="true">⌖</div>
+        <a class="map-control" id="openMap" href="https://www.openstreetmap.org/?mlat=41.8978&mlon=12.4895#map=15/41.8978/12.4895" target="_blank" rel="noopener">Apri area</a>
       </div>
     </section>
-
     <section class="wrap section" id="passaporto">
       <div class="section-title">Passaporto</div>
       <div class="passport" aria-label="Passaporto di Aurora">
         <div class="stamp-area"><div class="stamp">Prima<br>tappa</div></div>
-        <div class="passport-main">
-          <h3>Roma</h3>
-          <p><strong>6 luglio 2026</strong><br>Prima partenza. Aurora entra nel mondo e inizia il suo viaggio.</p>
-        </div>
+        <div class="passport-main"><h3 id="passportPlace">Roma</h3><p><strong id="passportDate">6 luglio 2026</strong><br><span id="passportText">Prima partenza. Aurora entra nel mondo e inizia il suo viaggio.</span></p></div>
         <div class="passport-code">Passaporto<br>della Traccia<br>N° AUR-0001</div>
       </div>
     </section>
-
     <section class="wrap section" id="diario">
       <div class="section-title">Diario</div>
-      <div class="diary-grid">
-        <div class="quote-card"><blockquote>Ogni incontro cambia la direzione di una Traccia.</blockquote></div>
-        <div class="note-card">
-          <small>Prima pagina</small>
-          <p>Oggi Aurora parte da Roma. Chi la incontra può aggiungere una tappa, una fotografia o poche parole al suo diario.</p>
-          <em>Il diario crescerà con i passaggi reali.</em>
-        </div>
-      </div>
+      <div class="diary-grid"><div class="quote-card"><blockquote>Ogni incontro cambia la direzione di una Traccia.</blockquote></div><div class="note-card"><small>Prima pagina</small><p>Oggi Aurora parte da Roma. Chi la incontra può aggiungere una tappa, una fotografia o poche parole al suo diario.</p><em>Il diario crescerà con i passaggi reali.</em></div></div>
     </section>
-
-    <section class="wrap">
-      <div class="cta-band">
-        <div>
-          <h2>Ho incontrato questa Traccia</h2>
-          <button class="btn" data-open-modal>Aggiungi il tuo passaggio →</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="wrap about" id="cose">
-      <h2>Un oggetto in viaggio.</h2>
-      <p>Trova la Traccia è un progetto esperienziale: una capsula fisica attraversa luoghi e persone, mentre il sito conserva il suo percorso, il passaporto e il diario. La tecnologia resta invisibile. Al centro ci sono il viaggio, la custodia e il gesto di lasciare un segno.</p>
-    </section>
+    <section class="wrap"><div class="cta-band"><div><h2>Ho incontrato questa Traccia</h2><button class="btn" data-open-modal>Aggiungi il tuo passaggio →</button></div></div></section>
+    <section class="wrap about" id="cose"><h2>Un oggetto in viaggio.</h2><p>Trova la Traccia è un progetto esperienziale: una capsula fisica attraversa luoghi e persone, mentre il sito conserva il suo percorso, il passaporto e il diario. La tecnologia resta invisibile. Al centro ci sono il viaggio, la custodia e il gesto di lasciare un segno.</p></section>
   </main>
-
-  <footer>
-    <span>Trova la Traccia</span>
-    <span>Ogni passaggio lascia un segno.</span>
-  </footer>
-
-  <div class="modal" id="foundModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-box">
-      <button class="close" data-close-modal aria-label="Chiudi">×</button>
-      <h2 id="modalTitle">Hai incontrato Aurora.</h2>
-      <p>Questa è una demo: il passaggio viene salvato solo su questo browser. Nel sistema definitivo sarà registrato nel diario della Traccia.</p>
-      <form id="foundForm">
-        <div class="form-row">
-          <label for="place">Dove l'hai trovata?</label>
-          <input id="place" name="place" placeholder="Roma, quartiere, luogo..." />
-        </div>
-        <div class="form-row">
-          <label for="message">Messaggio per il diario</label>
-          <textarea id="message" name="message" placeholder="Lascia poche parole sul tuo incontro con Aurora..."></textarea>
-        </div>
-        <button class="btn dark" type="submit">Salva il passaggio</button>
-      </form>
-    </div>
-  </div>
+  <footer><span>Trova la Traccia</span><span>Ogni passaggio lascia un segno.</span></footer>
+  <div class="modal" id="foundModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-box"><button class="close" data-close-modal aria-label="Chiudi">×</button><h2 id="modalTitle">Hai incontrato Aurora.</h2><p>Questa è una demo: il passaggio viene salvato solo su questo browser. Nel sistema definitivo sarà registrato nel diario della Traccia.</p><form id="foundForm"><div class="form-row"><label for="place">Dove l'hai trovata?</label><input id="place" name="place" placeholder="Roma, quartiere, luogo..." /></div><div class="form-row"><label for="message">Messaggio per il diario</label><textarea id="message" name="message" placeholder="Lascia poche parole sul tuo incontro con Aurora..."></textarea></div><button class="btn dark" type="submit">Salva il passaggio</button></form></div></div>
   <div class="toast" id="toast">Passaggio salvato in demo.</div>
-
   <script>
-    const months = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
-    function updateClock(){
-      const now = new Date();
-      const date = `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
-      const time = now.toLocaleTimeString('it-IT', {hour:'2-digit', minute:'2-digit'});
-      document.getElementById('currentDate').textContent = date;
-      document.getElementById('currentTime').textContent = time;
+    const months=['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+    function updateClock(){const now=new Date();document.getElementById('currentDate').textContent=`${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;document.getElementById('currentTime').textContent=now.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});} updateClock(); setInterval(updateClock,15000);
+    const modal=document.getElementById('foundModal'); const toast=document.getElementById('toast');
+    document.querySelectorAll('[data-open-modal]').forEach(el=>el.addEventListener('click',()=>modal.classList.add('active'))); document.querySelectorAll('[data-close-modal]').forEach(el=>el.addEventListener('click',()=>modal.classList.remove('active'))); modal.addEventListener('click',event=>{if(event.target===modal)modal.classList.remove('active')}); document.addEventListener('keydown',event=>{if(event.key==='Escape')modal.classList.remove('active')});
+    document.getElementById('foundForm').addEventListener('submit',event=>{event.preventDefault();const data=Object.fromEntries(new FormData(event.target).entries());const saved=JSON.parse(localStorage.getItem('aurora_passaggi_demo')||'[]');saved.push({...data,createdAt:new Date().toISOString()});localStorage.setItem('aurora_passaggi_demo',JSON.stringify(saved));event.target.reset();modal.classList.remove('active');toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2200);});
+  </script>
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js';
+    import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js';
+    import { firebaseConfig, TRACE_ID } from './firebase-config.js';
+
+    const defaultLat = 41.8978;
+    const defaultLng = 12.4895;
+    const statusEl = document.getElementById('firebaseStatus');
+    const isConfigured = firebaseConfig && firebaseConfig.apiKey && !firebaseConfig.apiKey.includes('INCOLLA');
+
+    function setMap(lat, lng){
+      const box = 0.018;
+      const bbox = `${lng-box}%2C${lat-box/2}%2C${lng+box}%2C${lat+box/2}`;
+      document.getElementById('osmFrame').src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lng}`;
+      document.getElementById('openMap').href = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=15/${lat}/${lng}`;
     }
-    updateClock();
-    setInterval(updateClock, 15000);
-
-    const modal = document.getElementById('foundModal');
-    const toast = document.getElementById('toast');
-    document.querySelectorAll('[data-open-modal]').forEach(el => el.addEventListener('click', () => modal.classList.add('active')));
-    document.querySelectorAll('[data-close-modal]').forEach(el => el.addEventListener('click', () => modal.classList.remove('active')));
-    modal.addEventListener('click', (event) => { if(event.target === modal) modal.classList.remove('active'); });
-    document.addEventListener('keydown', (event) => { if(event.key === 'Escape') modal.classList.remove('active'); });
-
-    document.getElementById('foundForm').addEventListener('submit', (event) => {
-      event.preventDefault();
-      const data = Object.fromEntries(new FormData(event.target).entries());
-      const saved = JSON.parse(localStorage.getItem('aurora_passaggi_demo') || '[]');
-      saved.push({...data, createdAt: new Date().toISOString()});
-      localStorage.setItem('aurora_passaggi_demo', JSON.stringify(saved));
-      event.target.reset();
-      modal.classList.remove('active');
-      toast.classList.add('show');
-      setTimeout(()=>toast.classList.remove('show'), 2200);
-    });
+    function minutesAgo(iso){
+      if(!iso) return 'demo';
+      const diff = Math.max(0, Date.now() - new Date(iso).getTime());
+      const min = Math.round(diff / 60000);
+      if(min < 1) return 'adesso';
+      if(min === 1) return '1 minuto fa';
+      if(min < 60) return `${min} minuti fa`;
+      const ore = Math.round(min/60);
+      if(ore === 1) return '1 ora fa';
+      return `${ore} ore fa`;
+    }
+    function updateLive(data){
+      if(!data) return;
+      const lat = Number(data.lat); const lng = Number(data.lng);
+      const place = data.locationLabel || 'Tappa in corso';
+      const signal = minutesAgo(data.sentAt);
+      if(Number.isFinite(lat) && Number.isFinite(lng)) setMap(lat,lng);
+      document.getElementById('lastPlace').textContent = place;
+      document.getElementById('lastSignal').textContent = signal;
+      document.getElementById('mapSmall').textContent = `${place}, area approssimata`;
+      document.getElementById('mapTitle').textContent = data.state === 'In custodia' ? 'Aurora è in custodia.' : 'Aurora è in viaggio.';
+      document.getElementById('traceState').textContent = data.state || 'In viaggio';
+      document.getElementById('traceIntro').textContent = `Aurora ha inviato l'ultimo segnale da ${place}.`;
+      document.getElementById('passportPlace').textContent = place;
+      document.getElementById('passportDate').textContent = new Date(data.sentAt || Date.now()).toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'});
+      document.getElementById('passportText').textContent = `Ultimo segnale pubblico ricevuto da ${place}. Posizione approssimata a 50 metri.`;
+      statusEl.textContent = `Segnale ricevuto: ${signal}.`;
+    }
+    if(isConfigured){
+      try{
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        onValue(ref(db, `traces/${TRACE_ID}/current`), snapshot => {
+          if(snapshot.exists()) updateLive(snapshot.val());
+          else statusEl.textContent = 'Firebase collegato. In attesa del primo segnale da track.html.';
+        }, error => { statusEl.textContent = 'Firebase collegato, ma lettura non autorizzata: controlla le Rules.'; console.error(error); });
+      }catch(error){
+        statusEl.textContent = 'Config Firebase non valida.';
+        console.error(error);
+      }
+    }else{
+      setMap(defaultLat, defaultLng);
+      statusEl.textContent = 'Demo statica. Compila firebase-config.js per attivare il telefono come Traccia.';
+    }
   </script>
 </body>
 </html>
