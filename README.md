@@ -1,32 +1,25 @@
-# Trova la Traccia — sito v4
+# Trova la Traccia — sito prototipo v5
 
-Versione grafica premium per GitHub Pages.
+Versione GitHub Pages del prototipo.
 
 ## Contenuti
 
-- Home narrativa con data e ora in grande.
+- Home editoriale con data e ora in grande.
+- Orario ridotto del 20% rispetto alla proposta precedente.
 - Una sola Traccia: Aurora.
-- Viaggio con partenza da Roma.
+- Partenza da Roma.
+- Mappa Leaflet + OpenStreetMap.
 - Posizione pubblica approssimata a 50 metri.
-- Carta d'identità della Traccia.
-- Passaporto della Traccia.
-- Diario.
-- Archivio con una sola scheda.
-- Modulo demo “Ho incontrato questa Traccia”.
+- Scheda Aurora, Passaporto, Diario e modulo demo “Ho incontrato questa Traccia”.
 
 ## Pubblicazione su GitHub Pages
 
 Caricare nella root del repository:
 
 - `index.html`
-- cartella `assets`
 - `README.md`
+- cartella `assets`
 
-Poi andare in:
+Poi andare su:
 
-`Settings → Pages → Deploy from a branch → main → / (root)`
-
-## Nota tecnica
-
-Questa versione è statica. I passaggi demo sono salvati nel browser con `localStorage`.
-Per GPS reale e passaggi persistenti serviranno backend, database e API.
+Settings → Pages → Deploy from a branch → main → /root
