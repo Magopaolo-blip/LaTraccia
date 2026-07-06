@@ -180,14 +180,16 @@ button, input, textarea, select { font: inherit; }
 .map-shell {
   position: relative;
   overflow: hidden;
-  min-height: 360px;
+  min-height: 240px;
+  max-height: 240px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--paper-deep);
   box-shadow: var(--shadow);
 }
 #map {
-  min-height: 360px;
+  min-height: 240px;
+  max-height: 240px;
   width: 100%;
   filter: saturate(.55) contrast(.96);
 }
@@ -501,7 +503,7 @@ button, input, textarea, select { font: inherit; }
   .hero { min-height: 78vh; }
   .hero-actions { flex-direction: column; }
   .button { width: min(360px, 100%); }
-  .map-shell, #map { min-height: 340px; }
+  .map-shell, #map { min-height: 240px; max-height: 240px; }
   .trace-grid { grid-template-columns: 1fr; }
   .section-heading { align-items: flex-start; flex-direction: column; }
   .identity-grid, .passport-grid, .form-row { grid-template-columns: 1fr; }

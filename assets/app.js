@@ -9,19 +9,15 @@ const TRACE_DATA = [
     age: "In cammino",
     lastStop: "Roma",
     lastSignal: "18 minuti fa",
-    distanceKm: 84,
-    people: 12,
+    distanceKm: 0,
+    people: 1,
     lat: 41.9028,
     lng: 12.4964,
     path: [
-      [41.9028, 12.4964],
-      [41.9102, 12.4663],
-      [41.9218, 12.5152]
+      [41.9028, 12.4964]
     ],
     passport: [
-      { city: "Roma", date: "6 luglio 2026", note: "Prima partenza" },
-      { city: "Prati", date: "6 luglio 2026", note: "Primo passaggio" },
-      { city: "Monte Mario", date: "6 luglio 2026", note: "Nuova custodia" }
+      { city: "Roma", date: "6 luglio 2026", note: "Prima partenza" }
     ],
     diary: [
       { date: "6 luglio 2026", place: "Roma", text: "L’ho trovata in una mattina chiara. Sembrava già pronta a ripartire." }
@@ -97,7 +93,7 @@ function initMap() {
   map = L.map("map", {
     zoomControl: false,
     scrollWheelZoom: false
-  }).setView([42.7, 12.7], 6);
+  }).setView([41.9028, 12.4964], 13);
 
   L.control.zoom({ position: "bottomright" }).addTo(map);
 
