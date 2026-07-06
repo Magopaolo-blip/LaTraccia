@@ -3,93 +3,201 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#f4efe5" />
-  <meta name="description" content="Trova la Traccia — Segui il viaggio della Traccia." />
   <title>Trova la Traccia</title>
+  <meta name="description" content="Segui il viaggio della Traccia. Un oggetto in viaggio, un passaporto, un diario, una storia che continua." />
+  <meta name="theme-color" content="#f6f0e6" />
 
-  <link rel="preconnect" href="https://unpkg.com" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQEHcgGZwMJzAd9G2jdXxyTFCCX5bsw=" crossorigin="" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQzBf8V7pnb43eK0tB4wIuEbrMfBvOg=" crossorigin="" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
-  <header class="site-header" aria-label="Intestazione sito">
-    <a class="brand" href="#home" aria-label="Torna alla home">
-      <span class="brand-mark" aria-hidden="true">◆</span>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="site-header" aria-label="Navigazione principale">
+    <a class="brand" href="#top" aria-label="Trova la Traccia, torna all'inizio">
+      <span class="brand-mark">⌖</span>
       <span>TROVA LA TRACCIA</span>
     </a>
-    <nav class="nav" aria-label="Navigazione principale">
+    <nav class="desktop-nav">
       <a href="#viaggio">Il viaggio</a>
+      <a href="#passaporto">Passaporto</a>
+      <a href="#diario">Diario</a>
       <a href="#archivio">Archivio</a>
-      <a href="#cos-e">Cos’è</a>
     </nav>
+    <button class="menu-button" type="button" aria-label="Apri menu" data-menu-button>
+      <span></span><span></span>
+    </button>
   </header>
 
-  <main id="home">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-inner">
-        <p class="eyebrow">ADESSO</p>
-        <div class="current-time" aria-live="polite">
-          <div id="current-date" class="current-date">6 luglio 2026</div>
-          <div id="current-hour" class="current-hour">07:42</div>
+  <nav class="mobile-menu" aria-label="Menu mobile" data-mobile-menu>
+    <a href="#viaggio">Il viaggio</a>
+    <a href="#passaporto">Passaporto</a>
+    <a href="#diario">Diario</a>
+    <a href="#archivio">Archivio</a>
+  </nav>
+
+  <main id="top">
+    <section class="scene scene-hero" aria-label="Introduzione">
+      <div class="tiny-label">ADESSO</div>
+      <h1>TROVA<br>LA TRACCIA</h1>
+      <div class="clock" aria-live="polite">
+        <div id="current-date">6 LUGLIO 2026</div>
+        <strong id="current-time">08:42</strong>
+      </div>
+      <p class="hero-line">Una Traccia<br>sta viaggiando.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#incontro">Ho incontrato una Traccia</a>
+        <a class="btn btn-ghost" href="#viaggio">Segui il viaggio</a>
+      </div>
+      <a class="scroll-cue" href="#viaggio" aria-label="Scorri verso il viaggio">↓</a>
+    </section>
+
+    <section class="scene map-scene" id="viaggio" aria-label="Il viaggio della Traccia">
+      <div class="section-index">01 · IL VIAGGIO DELLA TRACCIA</div>
+      <div class="map-heading">
+        <p class="eyebrow">Aurora</p>
+        <h2>Partenza da Roma.</h2>
+        <p class="thin-text">La posizione pubblica è approssimata a 50 metri.</p>
+      </div>
+      <div class="map-wrap">
+        <div id="traceMap" role="img" aria-label="Mappa del viaggio di Aurora, partenza da Roma"></div>
+        <div class="map-vignette" aria-hidden="true"></div>
+        <article class="trace-mini-card" aria-label="Scheda rapida Aurora">
+          <span class="status-dot"></span>
+          <div>
+            <h3>Aurora</h3>
+            <p>In viaggio · Roma</p>
+          </div>
+          <dl>
+            <div><dt>Segnale</dt><dd>18 min fa</dd></div>
+            <div><dt>Incontri</dt><dd id="meeting-count">1</dd></div>
+            <div><dt>Età</dt><dd>In cammino</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <section class="scene identity-scene" aria-label="Carta d'identità della Traccia">
+      <div class="section-index">02 · CARTA D'IDENTITÀ</div>
+      <div class="identity-grid">
+        <div>
+          <p class="eyebrow">Traccia AUR-0636-01</p>
+          <h2>Aurora</h2>
+          <p class="large-statement">Ogni passaggio lascia un segno.</p>
         </div>
-
-        <h1 id="hero-title">Segui il viaggio della Traccia</h1>
-
-        <div class="hero-actions" aria-label="Azioni principali">
-          <a class="button button-primary" href="#trova">Ho trovato una Traccia</a>
-          <a class="button button-secondary" href="#viaggio">Esplora il viaggio</a>
+        <div class="identity-table" aria-label="Dati principali di Aurora">
+          <div><span>Nata il</span><strong>6 luglio 2026</strong></div>
+          <div><span>Luogo di nascita</span><strong>Roma</strong></div>
+          <div><span>Età del viaggio</span><strong>In cammino</strong></div>
+          <div><span>Ultima tappa</span><strong>Roma</strong></div>
+          <div><span>Persone incontrate</span><strong id="identity-meetings">1</strong></div>
+          <div><span>Stato</span><strong>In viaggio</strong></div>
         </div>
       </div>
     </section>
 
-    <section id="viaggio" class="map-section" aria-labelledby="map-title">
-      <div class="section-heading compact">
-        <p class="eyebrow">IL VIAGGIO DELLA TRACCIA</p>
-        <h2 id="map-title">Tracce in movimento</h2>
-      </div>
-      <div class="map-shell">
-        <div id="map" role="application" aria-label="Mappa delle Tracce"></div>
-        <div class="map-note">
-          Posizione pubblica approssimata a 50 metri.
+    <section class="scene passport-scene" id="passaporto" aria-label="Passaporto della Traccia">
+      <div class="section-index">03 · PASSAPORTO</div>
+      <div class="passport-shell">
+        <div class="passport-page passport-cover">
+          <span>PASSAPORTO<br>DELLA TRACCIA</span>
+          <h2>Aurora</h2>
+          <div class="compass" aria-hidden="true"></div>
+          <p>N° AUR-0636-01</p>
+          <small>Emesso il<br>6 luglio 2026</small>
+        </div>
+        <div class="passport-page passport-stamps">
+          <p class="stamp-title">TIMBRI DEL VIAGGIO</p>
+          <div class="stamp active">
+            <strong>ROMA</strong>
+            <span>6 LUG 2026</span>
+            <em>Prima partenza</em>
+          </div>
+          <div class="stamp empty">
+            <strong>PROSSIMA TAPPA</strong>
+            <span>in attesa</span>
+            <em>La storia continua.</em>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="archivio" class="archive-section" aria-labelledby="archive-title">
-      <div class="section-heading compact">
-        <p class="eyebrow">ARCHIVIO</p>
-        <h2 id="archive-title">Ultime Tracce</h2>
+    <section class="scene diary-scene" id="diario" aria-label="Diario della Traccia">
+      <div class="section-index">04 · DIARIO</div>
+      <div class="diary-board">
+        <article class="diary-note">
+          <p>Ogni incontro cambia la direzione di una Traccia.</p>
+          <p>Ogni Traccia cambia chi la incontra.</p>
+          <span>— Aurora</span>
+        </article>
+        <figure class="photo-card">
+          <div class="photo-placeholder rome"></div>
+          <figcaption>Roma · 6 luglio</figcaption>
+        </figure>
+        <figure class="photo-card tilted">
+          <div class="photo-placeholder capsule"></div>
+          <figcaption>Prima custodia</figcaption>
+        </figure>
       </div>
-      <div id="trace-grid" class="trace-grid" aria-live="polite"></div>
     </section>
 
-    <section id="cos-e" class="about-section" aria-labelledby="about-title">
-      <div class="about-card">
-        <p class="eyebrow">COS’È</p>
-        <h2 id="about-title">Un oggetto in viaggio.</h2>
-        <p>
-          Ogni Traccia ha un nome, un passaporto e un diario. Quando la incontri,
-          puoi aggiungere una tappa e aiutarla a continuare il suo viaggio.
-        </p>
+    <section class="scene archive-scene" id="archivio" aria-label="Archivio delle Tracce">
+      <div class="section-index">05 · ARCHIVIO</div>
+      <h2>Ultime Tracce</h2>
+      <button class="archive-card" type="button" data-open-trace>
+        <span class="archive-title">Aurora</span>
+        <span class="archive-status">In viaggio</span>
+        <span><small>Ultima tappa</small><strong>Roma</strong></span>
+        <span><small>Segnale</small><strong>18 min fa</strong></span>
+        <span><small>Età del viaggio</small><strong>In cammino</strong></span>
+        <span><small>Incontri</small><strong id="archive-meetings">1</strong></span>
+      </button>
+    </section>
+
+    <section class="scene encounter-scene" id="incontro" aria-label="Ho incontrato questa Traccia">
+      <div class="encounter-card">
+        <p class="eyebrow">Aurora</p>
+        <h2>Hai incontrato questa Traccia?</h2>
+        <p>Aggiungi una tappa al suo viaggio. Puoi usare la tua posizione o indicare il luogo manualmente.</p>
+        <form id="encounterForm" class="encounter-form">
+          <label>
+            Nome o pseudonimo
+            <input name="name" type="text" placeholder="Viaggiatore anonimo" autocomplete="name" />
+          </label>
+          <label>
+            Luogo
+            <input name="place" type="text" placeholder="Roma" required />
+          </label>
+          <label>
+            Messaggio nel diario
+            <textarea name="message" rows="4" placeholder="Dove l'hai trovata? Cosa vuoi lasciare nel suo diario?"></textarea>
+          </label>
+          <div class="form-actions">
+            <button class="btn btn-ghost" type="button" id="useLocation">Usa la mia posizione</button>
+            <button class="btn btn-primary" type="submit">Aggiungi passaggio</button>
+          </div>
+          <p class="form-note" id="formNote">La posizione pubblica sarà mostrata in modo approssimato.</p>
+        </form>
       </div>
     </section>
   </main>
 
-  <aside id="trace-panel" class="trace-panel" aria-hidden="true" aria-label="Dettaglio della Traccia">
-    <div class="panel-backdrop" data-close-panel></div>
-    <article class="panel-card" role="dialog" aria-modal="true" aria-labelledby="panel-title">
-      <button class="panel-close" type="button" data-close-panel aria-label="Chiudi">×</button>
-      <div id="panel-content"></div>
-    </article>
-  </aside>
-
-  <aside id="encounter-modal" class="trace-panel" aria-hidden="true" aria-label="Ho incontrato questa Traccia">
-    <div class="panel-backdrop" data-close-encounter></div>
-    <article class="panel-card encounter-card" role="dialog" aria-modal="true" aria-labelledby="encounter-title">
-      <button class="panel-close" type="button" data-close-encounter aria-label="Chiudi">×</button>
-      <div id="encounter-content"></div>
-    </article>
-  </aside>
+  <dialog class="trace-dialog" data-trace-dialog>
+    <button class="dialog-close" type="button" aria-label="Chiudi" data-close-dialog>×</button>
+    <p class="eyebrow">Il viaggio di</p>
+    <h2>Aurora</h2>
+    <div class="dialog-grid">
+      <div><span>Codice</span><strong>AUR-0636-01</strong></div>
+      <div><span>Ultima tappa</span><strong>Roma</strong></div>
+      <div><span>Età del viaggio</span><strong>In cammino</strong></div>
+      <div><span>Incontri</span><strong id="dialog-meetings">1</strong></div>
+    </div>
+    <a class="btn btn-primary" href="#incontro" data-close-dialog>Ho incontrato questa Traccia</a>
+  </dialog>
 
   <footer class="site-footer">
     <span>TROVA LA TRACCIA</span>
