@@ -2,7 +2,7 @@ const trace = {
   name: 'Aurora',
   city: 'Roma',
   coords: [41.902782, 12.496366],
-  directionPoint: [41.856, 12.615],
+  directionPoint: [41.875, 12.58],
   publicRadius: 50,
 };
 
@@ -25,7 +25,8 @@ function updateClock() {
 }
 
 function initMap() {
-  if (!window.L || !document.getElementById('traceMap')) return;
+  const target = document.getElementById('traceMap');
+  if (!window.L || !target) return;
 
   mapInstance = L.map('traceMap', {
     zoomControl: false,
@@ -34,7 +35,7 @@ function initMap() {
     scrollWheelZoom: false,
     doubleClickZoom: false,
     touchZoom: true,
-  }).setView([41.894, 12.51], 11);
+  }).setView([41.895, 12.515], 11);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -48,19 +49,19 @@ function initMap() {
   });
 
   L.polyline([trace.coords, trace.directionPoint], {
-    color: '#b58a35',
-    weight: 2,
+    color: '#ad812d',
+    weight: 3,
     opacity: 0.72,
-    dashArray: '2 10',
+    dashArray: '2 12',
     lineCap: 'round',
   }).addTo(mapInstance);
 
   L.circle(trace.coords, {
     radius: trace.publicRadius,
-    color: '#b58a35',
+    color: '#ad812d',
     weight: 1,
-    fillColor: '#b58a35',
-    fillOpacity: 0.16,
+    fillColor: '#ad812d',
+    fillOpacity: 0.18,
   }).addTo(mapInstance);
 
   L.marker(trace.coords, { icon }).addTo(mapInstance);
@@ -70,7 +71,7 @@ function initCenterButton() {
   const button = document.querySelector('[data-center-map]');
   if (!button) return;
   button.addEventListener('click', () => {
-    if (mapInstance) mapInstance.setView([41.894, 12.51], 11, { animate: true });
+    if (mapInstance) mapInstance.setView([41.895, 12.515], 11, { animate: true });
   });
 }
 
@@ -114,29 +115,20 @@ function initEncounterForm() {
   }
 }
 
-function initScrollButton() {
-  const button = document.querySelector('[data-scroll-incontro]');
-  if (!button) return;
-  button.addEventListener('click', () => {
-    document.getElementById('incontro')?.scrollIntoView({ behavior: 'smooth' });
-  });
-}
-
 function initReveals() {
-  const targets = document.querySelectorAll('.aurora-card, .map-card, .passport-strip, .diary-section blockquote, .about-section, .encounter-card');
+  const targets = document.querySelectorAll('.aurora-feature, .journey-card, .passport, .diary-section, .about-section, .encounter-section');
   targets.forEach((target) => target.classList.add('reveal'));
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) entry.target.classList.add('is-visible');
     });
-  }, { threshold: 0.14 });
+  }, { threshold: 0.12 });
   targets.forEach((target) => observer.observe(target));
 }
 
 updateClock();
 setInterval(updateClock, 30_000);
 initEncounterForm();
-initScrollButton();
 initReveals();
 window.addEventListener('load', () => {
   initMap();
